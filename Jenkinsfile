@@ -2,7 +2,6 @@ currentBuild.result = "SUCCESS"
 ansiColor('xterm') {
     node {
 
-
         def app
         def dockerRegistry = 'https://registry.hub.docker.com'
         def appVersion = ''
@@ -23,7 +22,7 @@ ansiColor('xterm') {
                     script      : 'git log -1 --pretty=format:%ct|date +"%m%d%Y-%H%M"'
             ]).trim()
 
-            appVersion = gitCommitTime() + '-' + gitShortCommit()
+            appVersion = "${gitCommitTime}-${gitShortCommit}"
             app = docker.build("dniel/blogr-www")
         }
 
