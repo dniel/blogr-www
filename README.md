@@ -1,5 +1,5 @@
 # blogr-www
-The Blogr Website
+The Blogr Website.
 
 ## Tech
 Nginx and static content.
