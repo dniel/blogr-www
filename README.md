@@ -11,3 +11,4 @@ Should write a quick overview of the application architecture with main points o
 
 ## Tech
 Nginx and static content.
+Docker container
