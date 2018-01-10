@@ -12,6 +12,6 @@ Add how to do local development description.
 Add how to do a release into production
 
 ## Tech
-Nginx and static content.
-Docker container
-html
+- Nginx
+- Docker container
+- HTNK
