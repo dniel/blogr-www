@@ -9,7 +9,7 @@ Should write a quick overview of the application architecture with main points o
 Add how to do local development description.
 
 ## Production 
-Add how to do a release into production
+Publish new docker image to DockerHub and Spinnaker will trigger a Pipeline that automaticaly deploys the image to development and beta kubernetes cluster. After waiting for user confirmation the pipeline if user approve release deploy it into the production cluster.
 
 ## Tech
 - Nginx
