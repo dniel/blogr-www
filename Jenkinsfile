@@ -5,15 +5,11 @@ ansiColor('xterm') {
         def app
         def dockerRegistry = 'https://registry.hub.docker.com'
         def appVersion = ''
+        def dockerImage = 'dniel/blogr-www'
 
-        stage('Clone repository') {
+        stage('Prepare) {
             deleteDir()
             checkout scm
-        }
-
-        stage('Build image') {
-            sh 'whoami' 
-            sh 'export'
             def gitShortCommit = sh([
                     returnStdout: true,
                     script      : 'git rev-parse --short HEAD'
@@ -23,21 +19,17 @@ ansiColor('xterm') {
                     returnStdout: true,
                     script      : 'git log -1 --pretty=format:%ct|date +"%m%d%Y-%H%M"'
             ]).trim()
-
             appVersion = "${gitCommitTime}-${gitShortCommit}"
-            app = docker.build("dniel/blogr-www")
         }
 
-        stage('Test image') {
-            app.inside {
-                sh 'echo "Tests passed"'
-            }
-        }
-
-        stage('Push image') {
-            docker.withRegistry(dockerRegistry, 'docker-hub-credentials') {
-                app.push(appVersion)
-                app.push("latest")
+        stage('Build and Push Docker Image') {
+            container('docker'){
+              withCredentials([usernamePassword(credentialsId: 'docker-hub-credentials', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+                sh "docker login -u ${USERNAME} -p ${PASSWORD}"
+                sh "docker build -t ${dockerImage} ."
+                sh "docker tag ${dockerImage} ${dockerImage}:${appVersion}"
+                sh "docker push ${dockerImage}"
+              }
             }
         }
     }
