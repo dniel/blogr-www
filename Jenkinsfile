@@ -1,12 +1,10 @@
 #!/usr/bin/env groovy
 node {
-
-    def app
     def dockerRegistry = 'https://registry.hub.docker.com'
     def appVersion = ''
     def dockerImage = 'dniel/blogr-www'
 
-    stage('Prepare) {
+    stage('Prepare') {
         deleteDir()
         checkout scm
         def gitShortCommit = sh([
