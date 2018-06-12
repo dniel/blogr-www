@@ -12,6 +12,7 @@ ansiColor('xterm') {
         }
 
         stage('Build image') {
+            sh 'whoami'            
             def gitShortCommit = sh([
                     returnStdout: true,
                     script      : 'git rev-parse --short HEAD'
@@ -33,7 +34,6 @@ ansiColor('xterm') {
         }
 
         stage('Push image') {
-            sh 'whoami'
             docker.withRegistry(dockerRegistry, 'docker-hub-credentials') {
                 app.push(appVersion)
                 app.push("latest")
