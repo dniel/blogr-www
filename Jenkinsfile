@@ -12,7 +12,8 @@ ansiColor('xterm') {
         }
 
         stage('Build image') {
-            sh 'whoami'            
+            sh 'whoami' 
+            sh 'export'
             def gitShortCommit = sh([
                     returnStdout: true,
                     script      : 'git rev-parse --short HEAD'
