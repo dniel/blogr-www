@@ -33,6 +33,7 @@ ansiColor('xterm') {
         }
 
         stage('Push image') {
+            sh 'whoami'
             docker.withRegistry(dockerRegistry, 'docker-hub-credentials') {
                 app.push(appVersion)
                 app.push("latest")
