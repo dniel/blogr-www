@@ -4,7 +4,7 @@
 body {
     background-image: url("bg.jpg");
     background-repeat: repeat;
-    font: 4rem 'Indie Flower', cursive;
+    font: 2rem 'Indie Flower', cursive;
 }
 
 /* container */
@@ -17,7 +17,7 @@ body {
     margin: 40px;
     display: inline-block;
     position: relative;
-    width: 200px;
+    width: 800px;
     height: auto;
     background-color: lightyellow;
 }
