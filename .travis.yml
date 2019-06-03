@@ -14,8 +14,8 @@ script:
 
 after_success:
   - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
-  - docker tag dniel/www:$APP_VERSION
-  - docker tag dniel/www:$BRANCH
+  - docker tag dniel/www dniel/www:$APP_VERSION
+  - docker tag dniel/www dniel/www:$BRANCH
   - docker push dniel/www:$APP_VERSION
   - docker push dniel/www:$BRANCH
   - if [ "$TRAVIS_BRANCH" == "master" ]; then
