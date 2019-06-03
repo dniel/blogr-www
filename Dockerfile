@@ -1,6 +1,6 @@
 FROM nginx:alpine
-COPY src/ /usr/share/nginx/html
-COPY config/nginx.conf /etc/nginx/nginx.conf
+COPY html /usr/share/nginx/html
+COPY conf/nginx.conf /etc/nginx/nginx.conf
 
 EXPOSE 80
 

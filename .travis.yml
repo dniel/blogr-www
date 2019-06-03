@@ -1,0 +1,23 @@
+if: tag IS blank
+
+services:
+  - docker
+
+before_script:
+  - export COMMIT_HASH=$(git rev-parse --short ${TRAVIS_COMMIT})
+  - export BRANCH=${TRAVIS_PULL_REQUEST_BRANCH:-$TRAVIS_BRANCH}
+  - export COMMIT_TIME=$(git log -1 --pretty=format:%ct|date +"%m%d%Y-%H%M")
+  - export APP_VERSION=$COMMIT_TIME-$COMMIT_HASH-$BRANCH
+
+script:
+  - docker build -t dniel/www .
+
+after_success:
+  - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
+  - docker tag dniel/www:$APP_VERSION
+  - docker tag dniel/www:$BRANCH
+  - docker push dniel/www:$APP_VERSION
+  - docker push dniel/www:$BRANCH
+  - if [ "$TRAVIS_BRANCH" == "master" ]; then
+    docker push dniel/www:latest;
+    fi
