@@ -10,7 +10,7 @@ before_script:
   - export APP_VERSION=$COMMIT_TIME-$COMMIT_HASH-$BRANCH
 
 script:
-  - docker build -t dniel/www .
+  - docker build -f .travis/docker/Dockerfile -t dniel/www .
 
 after_success:
   - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
